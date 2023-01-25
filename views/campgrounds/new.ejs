@@ -1,4 +1,6 @@
 <% layout('layouts/boilerplate') %>
+<link rel="stylesheet" href="/stylessheets/imgPreview.css">
+
 <div class="row">
     <h1 class="text-center">New Campground</h1>
     <div class="col-6 offset-3">
@@ -13,10 +15,6 @@
                 <input class="form-control" type="text" id="location" name="campground[location]"required>
                 <div class="valid-feedback">Looks good!</div>
             </div>
-            <div class="mb-3">
-                <label for="image" class="form-label">Image(s)</label>
-                <input class="form-control" type="file" id="image" name="image" multiple>
-            </div>
             <div class=" mb-3">
                 <label class="form-label" for="price">Campground Price</label>
                 <div class="input-group">
@@ -29,6 +27,12 @@
                 <label class="form-label" for="description">Description</label>
                 <textarea class="form-control" type="text" id="description" name="campground[description]" required></textarea>
                 <div class="valid-feedback">Looks good!</div>
+            </div>
+            <div class="mb-3 custom-file">
+                <label for="image" class="form-label">Image(s)</label>
+                <input class="form-control" type="file" id="image" name="image" multiple onchange="previewMultiple(event)">
+                <label for="image" class="form-label custom-file-label text-muted"></label>
+                <div id="formFile"></div>
             </div>
             <div class="mb-3">
                 <button class="btn btn-success" >Add campground</button>
