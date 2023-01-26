@@ -2,13 +2,15 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibGlzYS1jIiwiYSI6ImNsZGJpMGwzYzAwdDYzdW8yd3Frd
 campgrounds = {features: JSON.parse(campgrounds)};
 
 const map = new mapboxgl.Map({
-container: 'map',
-// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-style: 'mapbox://styles/mapbox/light-v11',
-center: [-103.5917, 40.6699],
-zoom: 3
+    container: 'cluster-map',
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+    style: 'mapbox://styles/mapbox/light-v11',
+    center: [-103.5917, 40.6699],
+    zoom: 3
 });
  
+map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
+
 map.on('load', () => {
 // Add a new source from our GeoJSON data and
 // set the 'cluster' option to true. GL-JS will
@@ -37,11 +39,11 @@ map.on('load', () => {
             'circle-color': [
                 'step',
                 ['get', 'point_count'],
-                '#51bbd6',
+                '#52AA5E',
                 10,
-                '#f1f075',
+                '#52AA8A',
                 30,
-                '#f28cb1'
+                '#388659'
             ],
             'circle-radius': [
                 'step',
