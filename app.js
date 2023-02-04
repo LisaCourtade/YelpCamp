@@ -18,11 +18,13 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const Campground = require('./models/campground');
 const Review = require('./models/review');
-const User = require('./models/user')
+const User = require('./models/user');
+const MongoStore = require('connect-mongo');
 
 mongoose.set('strictQuery', true);
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+const dbUrl = 'mongodb://localhost:27017/yelp-camp'
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -44,7 +46,11 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(mongoSanitize({ replaceWith: '_' }));
 
+
 const sessionConfig = {
+    store: MongoStore.create({
+        mongoUrl: dbUrl
+    }),
     secret: 'thisisasecret',
     name: 'sessionId',
     resave: false,

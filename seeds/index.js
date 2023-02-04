@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const cities = require('./cities');
+const cities = require('./european-cities');
 const { places, descriptors } = require('./seedHelpers');
 const Campground = require('../models/campground');
 
@@ -16,14 +16,14 @@ const sample = (array) => array[Math.floor(Math.random() * array.length)];
 const seedDB = async () => {
     await Campground.deleteMany({});
     for (let i = 0; i < 300; i++) {
-        const random1000 = Math.floor(Math.random() * 1000);
+        const random = Math.floor(Math.random() * 69);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
             author: '63c8fbd78e9f5972dd6b8228',
-            location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            location: `${cities[random].city}, ${cities[random].country}`,
             geometry: {
                 type: 'Point',
-                coordinates: [cities[random1000].longitude, cities[random1000].latitude]
+                coordinates: [cities[random].longitude, cities[random].latitude]
             },
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'A wonderful camping area, with a breathtaking view and unique sunsets. Grab your tent because we are waiting for you to come visit us!',
