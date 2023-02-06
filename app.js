@@ -23,7 +23,7 @@ const MongoStore = require('connect-mongo');
 
 mongoose.set('strictQuery', true);
 
-const dbUrl = 'mongodb://localhost:27017/yelp-camp'
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp'
 mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
@@ -51,7 +51,7 @@ const sessionConfig = {
     store: MongoStore.create({
         mongoUrl: dbUrl
     }),
-    secret: 'thisisasecret',
+    secret: process.env.SECRET,
     name: 'sessionId',
     resave: false,
     saveUninitialized: true,
