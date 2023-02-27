@@ -1,4 +1,4 @@
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = mapToken;
 campgrounds = {features: JSON.parse(campgrounds)};
 
 const map = new mapboxgl.Map({

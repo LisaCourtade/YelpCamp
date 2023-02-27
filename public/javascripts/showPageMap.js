@@ -1,8 +1,10 @@
-mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
+mapboxgl.accessToken = mapToken;
+
 campground = JSON.parse(campground);
 
 const map = new mapboxgl.Map({
     container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/light-v11',
     center: campground.geometry.coordinates, // starting position [lng, lat]
     zoom: 9, // starting zoom
 });

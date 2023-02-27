@@ -64,7 +64,7 @@
                     <p class="card-text">
                         <small class="text-muted"><%= campground.location %></small> 
                     </p>
-                    <a class="btn btn-primary" href="/campgrounds/list/<%=campground._id%>"> View <%=campground.title%></a>
+                    <a class="btn btn-primary" href="/campgrounds/<%=campground._id%>"> View <%=campground.title%></a>
                 </div>
             </div>
         </div>
@@ -117,9 +117,11 @@
     </ul>
 <% } %>
 
+
+
 <script>
     const mapToken ='<%-process.env.MAPBOX_TOKEN%>';
-    let campgrounds = `<%-JSON.stringify(campgrounds)%>`
+    let campgrounds = `<%-JSON.stringify(campgrounds)%>`;
 </script>
 
 <script src="/javascripts/clusterMap.js"></script>
