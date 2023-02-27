@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoibGlzYS1jIiwiYSI6ImNsZGJpMGwzYzAwdDYzdW8yd3FrdGk5ZmMifQ.-Fuo-ohfzdLh6s0mv429og';
+mapboxgl.accessToken = process.env.MAPBOX_TOKEN;
 campgrounds = {features: JSON.parse(campgrounds)};
 
 const map = new mapboxgl.Map({
