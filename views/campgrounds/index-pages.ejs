@@ -1,121 +1,124 @@
 <% layout('layouts/boilerplate') %> 
 
-<div id="cluster-map" style="height: 300px;"></div>
+<main class="container mt-5">
 
-<% if (pages > 0) { %>
-    <ul class="pagination justify-content-center mt-3">
-        <% if (current == 1) { %>
-            <li class="page-item disabled">
-                <a class="page-link" href="/campgrounds/list/1">First page</a>
-            </li>
-        <% } else { %>
-            <li class="page-item">
-                <a class="page-link" href="/campgrounds/list/1">First page</a>
-            </li>
-        <% } %>
-        <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-        <% if (i !== 1) { %>
-            <li class="page-item disabled">
-                <a class="page-link">...</a>
-            </li>
-        <% } %>
-        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-            <% if (i == current) { %>
-                <li class="page-item active">
-                    <a class="page-link"><%= i %></a>
+    <div id="cluster-map" style="height: 300px;"></div>
+
+    <% if (pages > 0) { %>
+        <ul class="pagination justify-content-center mt-3">
+            <% if (current == 1) { %>
+                <li class="page-item disabled">
+                    <a class="page-link text-success" href="/campgrounds/list/1">First page</a>
                 </li>
             <% } else { %>
                 <li class="page-item">
-                    <a class="page-link" href="/campgrounds/list/<%= i %>"><%= i %></a>
+                    <a class="page-link text-success" href="/campgrounds/list/1">First page</a>
                 </li>
             <% } %>
-            <% if (i == Number(current) + 4 && i < pages) { %>
+            <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
                 <li class="page-item disabled">
-                    <a class="page-link">...</a>
+                    <a class="page-link text-success">...</a>
                 </li>
             <% } %>
-        <% } %>
-        <% if (current == pages) { %>
-            <li class="page-item disabled">
-                <a class="page-link">Last page</a>
-            </li>
-        <% } else { %>
-            <li class="page-item">
-                <a class="page-link" href="/campgrounds/list/<%= pages %>">Last page</a>
-            </li>
-        <% } %>
-    </ul>
-<% } %>
-
-<% for (let campground of campgrounds) { %>
-    <div class="card mb-3">
-        <div class="row">
-            <div class="col-md-4">
-                <% if (campground.images.length) { %>
-                <img class="img-fluid" src="<%=campground.images[0].url%>" alt="" crossorigin>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="page-item active">
+                        <a class="page-link bg-success border-success"><%= i %></a>
+                    </li>
                 <% } else { %>
-                <img class="img-fluid" src="https://res.cloudinary.com/driu8s9eg/image/upload/v1674555541/YelpCamp/dsevhzktq91mwo3jizxn.jpg" alt="" crossorigin>
-                <% } %> 
-            </div>
-            <div class="col-lg-8">
-                <div class="card-body">
-                    <h5 class="card-title"><%= campground.title %></h5>
-                    <p class="card-text"><%= campground.description %></p>
-                    <p class="card-text">
-                        <small class="text-muted"><%= campground.location %></small> 
-                    </p>
-                    <a class="btn btn-primary" href="/campgrounds/list/<%=campground._id%>"> View <%=campground.title%></a>
+                    <li class="page-item">
+                        <a class="page-link text-success" href="/campgrounds/list/<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="page-item disabled">
+                        <a class="page-link text-success">...</a>
+                    </li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="page-item disabled">
+                    <a class="page-link text-success">Last page</a>
+                </li>
+            <% } else { %>
+                <li class="page-item">
+                    <a class="page-link text-success" href="/campgrounds/list/<%= pages %>">Last page</a>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+
+    <% for (let campground of campgrounds) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <% if (campground.images.length) { %>
+                    <img class="img-fluid" src="<%=campground.images[0].url%>" alt="" crossorigin>
+                    <% } else { %>
+                    <img class="img-fluid" src="https://res.cloudinary.com/driu8s9eg/image/upload/v1674555541/YelpCamp/dsevhzktq91mwo3jizxn.jpg" alt="" crossorigin>
+                    <% } %> 
+                </div>
+                <div class="col-lg-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= campground.title %></h5>
+                        <p class="card-text"><%= campground.description %></p>
+                        <p class="card-text">
+                            <small class="text-muted"><%= campground.location %></small> 
+                        </p>
+                        <a class="btn btn-success" href="/campgrounds/<%=campground._id%>"> View <%=campground.title%></a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-<% } %>
+    <% } %>
 
 
-<% if (pages > 0) { %>
-    <ul class="pagination justify-content-center mt-3">
-        <% if (current == 1) { %>
-            <li class="page-item disabled">
-                <a class="page-link" href="/campgrounds/list/1">First page</a>
-            </li>
-        <% } else { %>
-            <li class="page-item">
-                <a class="page-link" href="/campgrounds/list/1">First page</a>
-            </li>
-        <% } %>
-        <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
-        <% if (i !== 1) { %>
-            <li class="page-item disabled">
-                <a class="page-link">...</a>
-            </li>
-        <% } %>
-        <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
-            <% if (i == current) { %>
-                <li class="page-item active">
-                    <a class="page-link"><%= i %></a>
+    <% if (pages > 0) { %>
+        <ul class="pagination justify-content-center mt-3">
+            <% if (current == 1) { %>
+                <li class="page-item disabled">
+                    <a class="page-link text-success" href="/campgrounds/list/1">First page</a>
                 </li>
             <% } else { %>
                 <li class="page-item">
-                    <a class="page-link" href="/campgrounds/list/<%= i %>"><%= i %></a>
+                    <a class="page-link text-success" href="/campgrounds/list/1">First page</a>
                 </li>
             <% } %>
-            <% if (i == Number(current) + 4 && i < pages) { %>
+            <% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
                 <li class="page-item disabled">
-                    <a class="page-link">...</a>
+                    <a class="page-link text-success">...</a>
                 </li>
             <% } %>
-        <% } %>
-        <% if (current == pages) { %>
-            <li class="page-item disabled">
-                <a class="page-link">Last page</a>
-            </li>
-        <% } else { %>
-            <li class="page-item">
-                <a class="page-link" href="/campgrounds/list/<%= pages %>">Last page</a>
-            </li>
-        <% } %>
-    </ul>
-<% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="page-item active">
+                        <a class="page-link bg-success border-success"><%= i %></a>
+                    </li>
+                <% } else { %>
+                    <li class="page-item">
+                        <a class="page-link text-success" href="/campgrounds/list/<%= i %>"><%= i %></a>
+                    </li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="page-item disabled">
+                        <a class="page-link text-success">...</a>
+                    </li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="page-item disabled">
+                    <a class="page-link text-success">Last page</a>
+                </li>
+            <% } else { %>
+                <li class="page-item">
+                    <a class="page-link text-success" href="/campgrounds/list/<%= pages %>">Last page</a>
+                </li>
+            <% } %>
+        </ul>
+    <% } %>
+</main>
 
 <script>
     const mapToken ='<%-process.env.MAPBOX_TOKEN%>';

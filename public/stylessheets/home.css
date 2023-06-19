@@ -30,7 +30,16 @@ body {
 
 }
 
+.brand:hover {
+ cursor: default;
+}
+
 .btn-secondary, .btn-secondary:hover{
     color: #333;
     text-shadow: none;
 }
+
+.colors {
+color: #52AA5E
+#52AA8A
+#388659}

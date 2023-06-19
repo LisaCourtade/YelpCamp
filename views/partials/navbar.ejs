@@ -1,20 +1,22 @@
 <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">YelpCamp</a>
+      <h3 class="navbar-brand float-md-start mb-0">YelpCamp</h3>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="/campgrounds">Map</a>
-          <a class="nav-link" href="/campgrounds/list/1">Campgrounds</a>
-          <a class="nav-link" href="/campgrounds/new">New Campground</a>
+          <a class="nav-link home" href="/">Home</a>
+          <a class="nav-link map" href="/campgrounds">Map</a>
+          <a class="nav-link camps" href="/campgrounds/list/1">Campgrounds</a>
+          <% if (currentUser) {%>
+            <a class="nav-link new" href="/campgrounds/new">New Campground</a> 
+          <% } %>
         </div>
         <div class="navbar-nav ms-auto">
           <% if (!currentUser) {%>  
-          <a class="nav-link" href="/login">Login</a>
-          <a class="nav-link" href="/register">Register</a>
+          <a class="nav-link login" href="/login">Login</a>
+          <a class="nav-link register" href="/register">Register</a>
           <% } else { %>
           <a class="nav-link" href="/logout">Logout</a>
           <% } %>
@@ -22,3 +24,23 @@
       </div>
     </div>
 </nav>
+
+<script>
+  const currentPath = window.location.pathname;
+  if (currentPath === '/campgrounds') {
+    let currentPageLink = document.querySelector('.map');
+    currentPageLink.classList.add('active');
+  } else if (currentPath.slice(0, 18) === '/campgrounds/list/') {
+    let currentPageLink = document.querySelector('.camps');
+    currentPageLink.classList.add('active');
+  } else if (currentPath === '/campgrounds/new') {
+    let currentPageLink = document.querySelector('.new');
+    currentPageLink.classList.add('active');
+  } else if (currentPath === '/login') {
+    let currentPageLink = document.querySelector('.login');
+    currentPageLink.classList.add('active');
+  } else if (currentPath === '/register') {
+    let currentPageLink = document.querySelector('.register');
+    currentPageLink.classList.add('active');
+  }
+</script>
