@@ -4,9 +4,28 @@ const mapBoxToken = process.env.MAPBOX_TOKEN;
 const geocoder = mbxGeocoding({accessToken: mapBoxToken});
 const { cloudinary } = require('../cloudinary');
 
-module.exports.index = async (req, res) => {
+module.exports.mainMap = async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds });
+    res.render('campgrounds/main-map', { campgrounds });
+}
+
+module.exports.indexPages = (req, res) => {
+    const perPage = 9;
+    const page = req.params.page || 1;
+    Campground
+        .find({})
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .exec(function(err, campgrounds) {
+            Campground.count().exec(function(err, count) {
+                if (err) return next(err);
+                res.render('campgrounds/index-pages', {
+                    campgrounds: campgrounds,
+                    current: page,
+                    pages: Math.ceil(count / perPage)
+                })
+            })
+        })
 }
 
 module.exports.indexPages = (req, res) => {

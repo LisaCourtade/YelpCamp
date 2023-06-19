@@ -1,0 +1,19 @@
+<% layout('layouts/boilerplate') %> 
+
+<main class="container-fluid">
+    <div id="cluster-map"></div>
+    
+    <div class="all-camps-button">
+        <h1 class="text-center">
+            <a href="/campgrounds/list/1" class="btn btn-lg btn-outline-secondary font-weight-bold border-black">
+            View All Campgrounds</a>
+        </h1>
+    </div>
+</main>
+
+<script>
+    const mapToken ='<%-process.env.MAPBOX_TOKEN%>';
+    let campgrounds = `<%-JSON.stringify(campgrounds)%>`
+</script>
+
+<script src="/javascripts/clusterMap.js"></script>

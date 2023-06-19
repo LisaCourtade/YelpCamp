@@ -5,8 +5,8 @@ const map = new mapboxgl.Map({
     container: 'cluster-map',
     // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
     style: 'mapbox://styles/mapbox/light-v11',
-    center: [11.062924, 47.358648],
-    zoom: 3
+    center: [11.413506, 50.013916],
+    zoom: 3.5
 });
  
 map.addControl(new mapboxgl.NavigationControl(), 'bottom-left');
@@ -75,8 +75,8 @@ map.on('load', () => {
         source: 'campgrounds',
         filter: ['!', ['has', 'point_count']],
         paint: {
-            'circle-color': '#11b4da',
-            'circle-radius': 4,
+            'circle-color': '#52AA5E',
+            'circle-radius': 8,
             'circle-stroke-width': 1,
             'circle-stroke-color': '#fff'
         }
@@ -126,6 +126,13 @@ map.on('load', () => {
         map.getCanvas().style.cursor = 'pointer';
     });
     map.on('mouseleave', 'clusters', () => {
+        map.getCanvas().style.cursor = '';
+    });
+
+    map.on('mouseenter', 'unclustered-point', () => {
+        map.getCanvas().style.cursor = 'pointer';
+    });
+    map.on('mouseleave', 'unclustered-point', () => {
         map.getCanvas().style.cursor = '';
     });
 });
